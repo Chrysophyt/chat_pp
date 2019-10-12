@@ -6,7 +6,10 @@
 </head>
 <body>
     <script src="jquery/jquery-3.4.1.min.js"></script>
-    <h1>Live Chat</h1>
+    <script src="chat.js"></script>
+
+    <h1>Chat++</h1>
+    <h3 id='status'></h3>
     <div class="chat_box">
         <ul>
             <li>Link 1</li>
@@ -23,9 +26,10 @@
             <li>Link 13</li>
             <li>Link 13</li>
         </ul>
-        <form>
-            <input name="message" type="text" autocomplete="off"/>        
+        <form action="javascript:constructRequest()" id="text_field">
+            <input  name="message" type="text" autocomplete="off"/>      
         </form>
+        <script>counter()</script>
     </div>
 </body>
 </html>
