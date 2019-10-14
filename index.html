@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="jquery/jquery-3.4.1.min.js"></script>
+    <script src="chat.js"></script>
     <link rel="stylesheet" href="index.css">
     <title>Chat++</title>
 </head>
 <body>
-    <script src="jquery/jquery-3.4.1.min.js"></script>
-    <script src="chat.js"></script>
+    
 
     <h1>Chat++</h1>
     <h3 id='status'></h3>
@@ -29,7 +30,11 @@
         <form action="javascript:constructRequest()" id="text_field">
             <input  name="message" type="text" autocomplete="off"/>      
         </form>
-        <script>counter()</script>
+    <script>
+        getStatusRequest()
+    </script>
     </div>
+
+    <div id=time></div>
 </body>
 </html>

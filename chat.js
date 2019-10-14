@@ -1,7 +1,7 @@
 var i = 0
 function counter(){
     console.log(i++)
-    //setTimeout(counter, 1000)
+    setTimeout(counter, 1000)
 }
 
 function changeStatus(string){
@@ -18,7 +18,7 @@ function constructRequest(){
         message_data[n['name']] = n['value']
     })
 
-    var sendMessage = $.ajax({
+    $.ajax({
         type: 'POST',
         url: "api/send_message",
         data: JSON.stringify(message_data),
@@ -38,4 +38,32 @@ function constructRequest(){
     // location /api/ {
     //     proxy_pass http://localhost:5000; //alamat flask api
     // }
+}
+
+var interval = 3000
+var current_status = 0
+function getStatusRequest(){
+    $.ajax({
+        type: 'GET',
+        url: 'api/get_status',
+        success: function (data) {
+                if(data['status']> current_status){
+                    getMessageRequest()
+                }  
+        },
+        complete: function (data) {
+                // Schedule the next
+                setTimeout(getStatusRequest, interval);
+        }
+    });
+}
+
+function getMessageRequest(){
+    $.ajax({
+        type: 'GET',
+        url: 'api/get_message',
+        success: function (data) {
+                console.log(data)
+        }
+    });
 }
