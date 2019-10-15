@@ -4,37 +4,32 @@
     <script src="jquery/jquery-3.4.1.min.js"></script>
     <script src="chat.js"></script>
     <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+
     <title>Chat++</title>
 </head>
 <body>
-    
 
     <h1>Chat++</h1>
     <h3 id='status'></h3>
-    <div class="chat_box">
-        <ul>
-            <li>Link 1</li>
-            <li>Link 2</li>
-            <li>Link 3</li>
-            <li>Link 4</li>
-            <li>Link 5</li>
-            <li>Link 6</li> 
-            <li>Link 7</li> 
-            <li>Link 8</li>
-            <li>Link 9</li>
-            <li>Link 10</li>
-            <li>Link 11</li>
-            <li>Link 13</li>
-            <li>Link 13</li>
-        </ul>
-        <form action="javascript:constructRequest()" id="text_field">
-            <input  name="message" type="text" autocomplete="off"/>      
-        </form>
-    <script>
-        getStatusRequest()
-    </script>
-    </div>
+    <h4>Masukan Nama</h4>
+    <input name="message" type="text" autocomplete="off"/>
+    <div class="card-container">
+        <div class="card-row">
+        </div>
+      </div>
 
+    <div class="chat_box">
+        <form action="javascript:constructRequest()" id="text_field" style="overflow:hidden">
+            <div class="input_text">
+                <input name="message" type="text" autocomplete="off"/>
+            </div>
+            <div class="submit_button">
+                <input class="submit_button" type="submit" value="Send">    
+            </div>
+        </form>
+    </div>
+    <script>getStatusRequest()</script>
     <div id=time></div>
 </body>
 </html>

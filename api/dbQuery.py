@@ -35,9 +35,8 @@ def getStatus(database):
 
 def getMessage(database, amount):
     cursor = database.cursor()
-    amount = (10,)
-    cursor.execute(get_message, amount)
+    parameter = (int(amount),)
+    cursor.execute(get_message, parameter)
     data = cursor.fetchall()
-    #print(data)
     return(data)
     

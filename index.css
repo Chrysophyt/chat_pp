@@ -1,11 +1,59 @@
-div.chat_box ul
-{
-    height:200px; 
-    width:18%;
-    overflow:hidden; 
-    overflow-y:scroll;
+.card-container {
+    width: 1350px;
+    white-space: nowrap;
 }
-div.chat_box ul
-{
-    
+  
+.card-row {
+    font-family: 'Open Sans', sans-serif;
+
+    width: 300px;
+    height: 400px;
+    overflow: auto;
+
+    background-color: #ededed;
+    border-radius: 5px;
+}
+
+.card{
+    margin-top:10px;
+    margin-bottom:10px;
+    margin-left:10px;
+    margin-right: 10px;
+    padding: 10px;
+    border-radius: 15px;
+
+    background-color: #ffffff;
+}
+
+.name{
+    font-weight: bold;
+}
+
+.chat_box{
+    width: 300px;
+    border-radius: 15px;
+}
+
+.input_text input{
+    float: left;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    padding: 5px;
+    background: transparent;
+    width: 190px;
+
+}
+
+.submit_button input{
+    float: left;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 5px;
+    width: 90px;
+}
+
+
+h1, h3, h4{
+    font-family: 'Open Sans'; 
+    color: #1f1c4a;
 }

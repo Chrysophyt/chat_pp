@@ -15,8 +15,10 @@ def send_message():
 
 @app.route('/api/get_message', methods=['GET'])
 def get_message():
+    data = request.args.get('amount')
+    print(data)
     if(database.is_connected()):
-        messages = getMessage(database, 10)
+        messages = getMessage(database, data)
         return jsonify(messages)
     return "ERROR_GET_MESSAGE"
 
