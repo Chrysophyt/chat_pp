@@ -48,6 +48,8 @@ function getStatusRequest(){
         url: 'api/get_status',
         success: function (data) {
                 if(data['status']> current_status){
+                    current_status = data['status']
+                    console.log(current_status)
                     getMessageRequest()
                 }  
         },

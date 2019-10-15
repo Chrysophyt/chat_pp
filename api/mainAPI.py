@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from dbQuery import connectToMySQLdb, addMessage, getStatus
+from dbQuery import connectToMySQLdb, addMessage, getStatus, getMessage
 app = Flask(__name__)
 
 database = connectToMySQLdb('chat_pp')
@@ -15,8 +15,10 @@ def send_message():
 
 @app.route('/api/get_message', methods=['GET'])
 def get_message():
-    print("GET")
-    return "get_message"
+    if(database.is_connected()):
+        messages = getMessage(database, 10)
+        return jsonify(messages)
+    return "ERROR_GET_MESSAGE"
 
 @app.route('/api/get_status', methods=['GET'])
 def get_status():

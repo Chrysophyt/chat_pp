@@ -6,6 +6,10 @@ add_message = ("INSERT INTO chat_data "
                "(username, message) "
                "VALUES (%s, %s)")
 
+get_message = ("SELECT * FROM chat_data "
+               "ORDER BY ID DESC "
+               "LIMIT %s")
+
 get_status =("SELECT MAX(ID) FROM chat_data")
 
 
@@ -28,4 +32,12 @@ def getStatus(database):
     cursor.execute(get_status)
     data = cursor.fetchall()
     return(data[0][0])
+
+def getMessage(database, amount):
+    cursor = database.cursor()
+    amount = (10,)
+    cursor.execute(get_message, amount)
+    data = cursor.fetchall()
+    #print(data)
+    return(data)
     
