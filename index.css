@@ -45,6 +45,7 @@
 }
 
 .submit_button input{
+    font-family: 'Open Sans', sans-serif;
     float: left;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;

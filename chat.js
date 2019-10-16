@@ -25,30 +25,41 @@ function createChat(name, message){
     card.appendChild(card_message)
 
     document.getElementsByClassName("card-row")[0].appendChild(card)
+
+    var objDiv = document.getElementsByClassName('chat_box')[0]
+    objDiv.scrollTop = objDiv.scrollHeight;
 }
 
 function constructRequest(){
 
-    var message_data ={}
+    username = document.getElementById('username').value
+    if (!/\S/.test(username)){
+        username = 'Anonymous'
+    }
 
+    var username_data = {'username': username}
+
+    var message_data ={}
     var message = $(document.getElementById('text_field')).serializeArray()
 
     $.map(message, (n, i)=>{
         message_data[n['name']] = n['value']
     })
 
-    console.log(message_data)
+
+    data = Object.assign(username_data, message_data)
 
     if (!/\S/.test(message_data['message'])){
         console.log("Only empty space, not sending data!")
         document.getElementById('text_field').reset()
         return
     }
+    console.log(data)
 
     $.ajax({
         type: 'POST',
         url: "api/send_message",
-        data: JSON.stringify(message_data),
+        data: JSON.stringify(data),
         contentType: "application/json",
         success: (d)=>{
             console.log(d)

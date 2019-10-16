@@ -23,7 +23,7 @@ def connectToMySQLdb(database_name):
     return(database)
 
 def addMessage(database, data):
-    message_data = ('', data['message'])
+    message_data = (data['username'], data['message'])
     cursor = database.cursor()
     cursor.execute(add_message, message_data)
     
