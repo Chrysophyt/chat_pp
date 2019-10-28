@@ -1,5 +1,8 @@
 from flask import Flask, request, jsonify, Response
-from dbQuery import connectToMySQLdb, addMessage, getStatus, getMessage
+from services.dbQuery import connectToMySQLdb, addMessage, getStatus, getMessage
+from services.JWTHandler import generateToken
+from services.Auth import createAccount
+
 app = Flask(__name__)
 
 database = connectToMySQLdb('chat_pp')
@@ -7,6 +10,23 @@ database = connectToMySQLdb('chat_pp')
 def tryConnectDatabase():
     global database 
     database = connectToMySQLdb('chat_pp')
+
+
+@app.route('/api/login', methods=['POST'])
+def login():
+    
+    return jsonify({'token' : generateToken('SECRET_KEY')})
+
+@app.route('/api/create_account', methods=['POST'])
+def create_account():    
+    data = request.get_json()
+    print(data)
+    if(database.is_connected()):
+        createAccount(data['username'], data['password'], database)
+    else:
+        tryConnectDatabase()
+        
+    return jsonify(status='success')
 
 @app.route('/api/send_message', methods=['POST'])
 def send_message():

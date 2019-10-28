@@ -1,7 +1,8 @@
 import mysql.connector
-#table schema 
-#create table 
+#table schema
 #chat_data(id int AUTO_INCREMENT, username text, message text, primary key(id));
+#account_data(username VARCHAR(50), password VARCHAR(50), primary key(username));
+
 add_message = ("INSERT INTO chat_data "
                "(username, message) "
                "VALUES (%s, %s)")
@@ -12,6 +13,9 @@ get_message = ("SELECT * FROM chat_data "
 
 get_status =("SELECT MAX(ID) FROM chat_data")
 
+create_account = ("INSERT INTO account_data "
+               "(username, password) "
+               "VALUES (%s, %s)")
 
 def connectToMySQLdb(database_name):
     database = mysql.connector.connect(
@@ -26,7 +30,14 @@ def addMessage(database, data):
     message_data = (data['username'], data['message'])
     cursor = database.cursor()
     cursor.execute(add_message, message_data)
-    
+
+def addAccount(database, username, password):
+    account_data = (username, password)
+    cursor = database.cursor()
+    cursor.execute(create_account, account_data)
+    database.commit()
+
+
 def getStatus(database):
     cursor = database.cursor()
     cursor.execute(get_status)
