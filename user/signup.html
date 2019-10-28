@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../index.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+
+    <title>Sign Up Chat++</title>
+    <script src="../jquery/jquery-3.4.1.min.js"></script>
+    <script src="signup.js"></script>
+</head>
+<body>
+    
+    <h1>Sign Up on Chat++ Now !</h1>
+    <h4>Already have an account? <a href='login.html'>Login Here</a></h4>
+    <form id="signup" action="javascript:requestSignUp()">
+            <label id="error_msg"></label>
+            <br>
+            <label>Username</label>
+            <br>
+            <input type="text" name="username">
+            <br>
+            <br>
+            <label>Password</label>
+            <br>
+            <input type="password" name="password">
+            <br>
+            <br>
+            <div>
+                <input class="submit_button" type="submit" value="Sign Up">    
+            </div>
+    </form>
+</body>
+</html>

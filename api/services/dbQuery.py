@@ -34,9 +34,12 @@ def addMessage(database, data):
 def addAccount(database, username, password):
     account_data = (username, password)
     cursor = database.cursor()
-    cursor.execute(create_account, account_data)
-    database.commit()
-
+    try:
+        cursor.execute(create_account, account_data)
+        database.commit()
+        return "Success"
+    except mysql.connector.errors.IntegrityError:
+        return "Sorry, the username already been taken"
 
 def getStatus(database):
     cursor = database.cursor()

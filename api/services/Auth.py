@@ -6,4 +6,5 @@ def checkUsername(username): #return bool true: available
     print('checkUsername')
 
 def createAccount(username, password, database):
-    addAccount(database, username, password)
+    status = addAccount(database, username, password)
+    return status

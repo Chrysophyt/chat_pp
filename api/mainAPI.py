@@ -21,12 +21,17 @@ def login():
 def create_account():    
     data = request.get_json()
     print(data)
+    result = ""
     if(database.is_connected()):
-        createAccount(data['username'], data['password'], database)
+        result = createAccount(data['username'], data['password'], database)
     else:
         tryConnectDatabase()
-        
-    return jsonify(status='success')
+        return jsonify(error="Database is down. :("), 500
+
+    if(result!="Success"):
+        return jsonify(status=result), 500
+
+    return jsonify(status=result)
 
 @app.route('/api/send_message', methods=['POST'])
 def send_message():

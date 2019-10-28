@@ -1,6 +1,6 @@
 .card-container {
     width: 1350px;
-    white-space: nowrap;
+    word-wrap: break-word;
 }
   
 .card-row {
@@ -32,6 +32,7 @@
 .chat_box{
     width: 300px;
     border-radius: 15px;
+    word-wrap: break-word;
 }
 
 .input_text input{
@@ -53,8 +54,17 @@
     width: 90px;
 }
 
-
 h1, h3, h4{
     font-family: 'Open Sans'; 
     color: #1f1c4a;
+}
+
+form{
+    font-family: 'Open Sans'; 
+}
+
+input{
+    float: left;
+    border-radius: 10px;
+    padding: 5px;
 }
