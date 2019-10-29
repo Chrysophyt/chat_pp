@@ -3,7 +3,7 @@ function changeStatus(message){
 }
 function serializeFormToJSON(){
     var form_data ={}            
-    var arr = $(document.getElementById("signup")).serializeArray()
+    var arr = $(document.getElementById("login")).serializeArray()
 
     $.map(arr, (n, i)=>{
         form_data[n['name']] = n['value']
@@ -14,7 +14,7 @@ function serializeFormToJSON(){
 function validate(data){
     usernameRegex = /^[a-z_-]{3,15}$/   
     validation = true
-    data['username'] = data['username'].toLowerCase()   //tidak case sensitive
+    data['username'] = data['username'].toString().toLowerCase()   //tidak case sensitive
 
     if(usernameRegex.test(data['username'])){
         console.log("user name detected")
@@ -38,11 +38,11 @@ function requestlogin(){
     if(validate(data)){
         $.ajax({
             type: 'POST',
-            url: "../api/create_account",
+            url: "../api/login",
             data: JSON.stringify(data),
             contentType: "application/json",
-            success: (d, XmlHttpRequest)=>{
-                alert('Registered Completed Redirecting you to the login page.')
+            success: (d)=>{
+                alert('Login Successful.')
                 
                 var start = new Date().getTime();
                 var end = start;
@@ -50,10 +50,11 @@ function requestlogin(){
                     end = new Date().getTime();
                 }
 
-                window.location = 'login.html'
+                window.location = '../'
             },
             error: (d)=>{
-                changeStatus(d.responseJSON['status'])
+                console.log(d)
+                changeStatus(d.responseJSON['error'])
             }
         });
     }

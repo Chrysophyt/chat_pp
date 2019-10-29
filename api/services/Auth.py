@@ -1,9 +1,10 @@
-from services.dbQuery import addAccount
+from services.dbQuery import addAccount, verifyAccountInfo
 
-def verifyLogin(username, password): #return bool true: data in db
-    print('verify')
-def checkUsername(username): #return bool true: available
-    print('checkUsername')
+def verifyLogin(username, password, database): #return bool true: data in db
+    if(verifyAccountInfo(database, username)!= False): #data = ('username', 'pass') So, data[1]
+        if(verifyAccountInfo(database, username)[1]==password):
+            return True
+    return False
 
 def createAccount(username, password, database):
     status = addAccount(database, username, password)

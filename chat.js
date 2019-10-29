@@ -8,6 +8,17 @@ function changeStatus(string){
     document.getElementById("status").innerHTML = string
 }
 
+function readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+
 function createChat(name, message){
     var card = document.createElement('div')
     card.className = 'card'
@@ -26,18 +37,17 @@ function createChat(name, message){
 
     document.getElementsByClassName("card-row")[0].appendChild(card)
 
-    var objDiv = document.getElementsByClassName('chat_box')[0]
+    var objDiv = document.getElementsByClassName('card-row')[0]
     objDiv.scrollTop = objDiv.scrollHeight;
 }
 
 function constructRequest(){
 
-    username = document.getElementById('username').value
-    if (!/\S/.test(username)){
-        username = 'Anonymous'
-    }
+    // username = document.getElementById('username').value
+    var jwtPayload = JSON.parse(window.atob(readCookie('access-token').split('.')[1]))
 
-    var username_data = {'username': username}
+
+    var username_data = {'username': jwtPayload['username']}
 
     var message_data ={}
     var message = $(document.getElementById('text_field')).serializeArray()
@@ -128,4 +138,22 @@ function getMessageRequest(messageAmount, status){
 
         }
     });
+}
+
+function getAuthentication(){
+    $.ajax({
+        type: 'GET',
+        url: 'api/validate',
+        complete: (d)=>{
+            if(d.status!=200){
+                element = document.getElementsByClassName("chat_box")[0];
+                element.parentNode.removeChild(element);
+                changeStatus(d.responseJSON['error']+" Please <a href='user/login.html'>Login</a> to Continue Chatting. ")
+
+            }
+            var jwtPayload = JSON.parse(window.atob(readCookie('access-token').split('.')[1]))
+            var seconds = parseInt(jwtPayload['exp'])*1000
+            document.getElementById("info").innerHTML = "You're Logged in as "+jwtPayload['username']+"<br>Session Will Expire on <br>"+ new Date(seconds).toString()
+        }
+    })
 }

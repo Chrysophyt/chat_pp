@@ -17,6 +17,8 @@ create_account = ("INSERT INTO account_data "
                "(username, password) "
                "VALUES (%s, %s)")
 
+get_account_info = ("SELECT username, password FROM account_data WHERE username= %s")
+
 def connectToMySQLdb(database_name):
     database = mysql.connector.connect(
         host = "localhost",
@@ -31,16 +33,6 @@ def addMessage(database, data):
     cursor = database.cursor()
     cursor.execute(add_message, message_data)
 
-def addAccount(database, username, password):
-    account_data = (username, password)
-    cursor = database.cursor()
-    try:
-        cursor.execute(create_account, account_data)
-        database.commit()
-        return "Success"
-    except mysql.connector.errors.IntegrityError:
-        return "Sorry, the username already been taken"
-
 def getStatus(database):
     cursor = database.cursor()
     cursor.execute(get_status)
@@ -54,3 +46,22 @@ def getMessage(database, amount):
     data = cursor.fetchall()
     return(data)
     
+def addAccount(database, username, password):
+    account_data = (username, password)
+    cursor = database.cursor()
+    try:
+        cursor.execute(create_account, account_data)
+        database.commit()
+        return "Success"
+    except mysql.connector.errors.IntegrityError:
+        return "Sorry, the username already been taken"
+
+def verifyAccountInfo(database, username):
+    cursor = database.cursor()
+    parameter = (username,)
+    cursor.execute(get_account_info, parameter)
+    data = cursor.fetchall()
+    if(cursor.rowcount==0):
+        return False
+    #print(data[0])
+    return(data[0])
